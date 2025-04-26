@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  serviceAccountName: prometheus
+  serviceMonitorSelector:
+    matchLabels:
+      release: prometheus
+  podMonitorSelector: {}  # Required for modern Prometheus Operator
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 250m
+  serviceMonitorNamespaceSelector: {}  # Required to discover across namespaces
+  enableAdminAPI: false  # Security best practice
